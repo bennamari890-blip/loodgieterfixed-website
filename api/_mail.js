@@ -229,7 +229,6 @@ async function sendContactRequest(body) {
           ['Dienst', escapeHtml(payload.service || '-')],
           ['Telefoon', escapeHtml(payload.phone)],
           ['E-mailadres', escapeHtml(payload.email)],
-          ['Moment', escapeHtml(submittedAt)],
         ],
         message: nl2br(payload.message || '-'),
         footerNote: 'Heb je spoed of lekkage? Bel dan direct naar 06 28 21 36 62.',
