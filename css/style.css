@@ -63,11 +63,46 @@ svg{display:block}
   box-shadow:0 1px 0 var(--line);
 }
 .nav-inner{height:92px;display:flex;align-items:center;justify-content:space-between;gap:28px}
-.logo{display:flex;align-items:center;font-family:"Manrope";font-weight:800;letter-spacing:0}
+.logo{display:flex;align-items:center;gap:12px;font-family:"Manrope";font-weight:800;letter-spacing:0}
 .logo img{
-  width:auto;max-width:34vw;height:104px;display:block;
+  width:auto;max-width:34vw;height:88px;display:block;
   object-fit:contain;
   filter:drop-shadow(0 8px 18px rgba(7,28,51,.08));
+}
+.brand-copy{
+  display:grid;
+  gap:4px;
+  padding-left:12px;
+  border-left:2px solid rgba(7,28,51,.28);
+  line-height:1;
+}
+.brand-name{
+  font:800 1.6rem/1 "Manrope",sans-serif;
+  color:var(--ink);
+  white-space:nowrap;
+}
+.brand-name span{color:var(--green)}
+.brand-line{
+  font:700 .68rem/1.16 "Manrope",sans-serif;
+  color:var(--ink);
+}
+.brand-line strong{color:var(--green)}
+.brand-tags{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin-top:3px;
+  font:800 .52rem/1 "DM Sans",sans-serif;
+  color:var(--ink);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.brand-tags i{
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:var(--green);
 }
 .logo-mark{
   width:48px;height:48px;border-radius:50%;
@@ -526,6 +561,9 @@ footer{padding:58px 0 30px}
     box-shadow:0 22px 55px rgba(23,32,29,.14)
   }
   .nav-links.open .btn{width:100%}
+  .brand-name{font-size:1.32rem}
+  .brand-line{font-size:.62rem}
+  .brand-tags{font-size:.48rem;gap:6px}
   .hero{padding-top:135px}
   .hero-grid,.section-head,.about-grid,.review-strip,.cta{grid-template-columns:1fr}
   .hero-media{min-height:580px}
@@ -546,7 +584,11 @@ footer{padding:58px 0 30px}
   .container{width:min(var(--max),calc(100% - 28px))}
   .nav-inner{height:78px}
   .logo-mark{width:42px;height:42px}
-  .logo img{height:72px;max-width:52vw}
+  .logo{gap:9px}
+  .logo img{height:58px;max-width:52vw}
+  .brand-copy{padding-left:9px;gap:3px}
+  .brand-name{font-size:1.05rem}
+  .brand-line,.brand-tags{display:none}
   .hero{min-height:auto;padding:118px 0 34px}
   .hero h1{font-size:clamp(2.9rem,14vw,4.6rem);margin-bottom:20px}
   .hero-lead{font-size:.96rem}
