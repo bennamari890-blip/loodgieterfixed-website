@@ -75,6 +75,31 @@ async function sendContactRequest(body) {
         payload.message || '-',
       ].join('\n'),
     });
+
+    await transporter.sendMail({
+      from: process.env.MAIL_FROM,
+      to: payload.email,
+      replyTo: process.env.MAIL_TO,
+      subject: 'We hebben je aanvraag ontvangen',
+      text: [
+        `Beste ${payload.name},`,
+        '',
+        'Bedankt voor je aanvraag via LoodgieterFixed.',
+        'We hebben je bericht ontvangen en nemen zo snel mogelijk contact met je op.',
+        '',
+        'Je aanvraag:',
+        `Dienst: ${payload.service || '-'}`,
+        `Telefoon: ${payload.phone}`,
+        '',
+        'Bericht:',
+        payload.message || '-',
+        '',
+        'Met vriendelijke groet,',
+        'LoodgieterFixed',
+        '06 28 21 36 62',
+        'info@loodgieterfixed.nl',
+      ].join('\n'),
+    });
   } catch (error) {
     const mailError = new Error(`Mailserver weigert of reageert niet: ${error.message || 'onbekende SMTP-fout'}`);
     mailError.statusCode = 502;
