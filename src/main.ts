@@ -138,10 +138,47 @@ if (!reduced && heroSlides.length > 1) {
 }
 
 if (quoteForm && formNote) {
-  quoteForm.addEventListener('submit', (event) => {
+  quoteForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    quoteForm.reset();
-    formNote.classList.add('success');
-    formNote.textContent = 'Bedankt, je aanvraag is verzonden. We nemen zo snel mogelijk contact met je op.';
+    const submitButton = quoteForm.querySelector<HTMLButtonElement>('[type="submit"]');
+    const formData = new FormData(quoteForm);
+    const payload = Object.fromEntries(formData.entries());
+
+    formNote.classList.remove('success', 'error');
+    formNote.textContent = 'Je aanvraag wordt verzonden...';
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Versturen...';
+    }
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json().catch(() => ({ message: '' }));
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Verzenden is niet gelukt.');
+      }
+
+      quoteForm.reset();
+      formNote.classList.add('success');
+      formNote.textContent = 'Bedankt, je aanvraag is verzonden. We nemen zo snel mogelijk contact met je op.';
+    } catch (error) {
+      formNote.classList.add('error');
+      formNote.textContent =
+        error instanceof Error
+          ? error.message
+          : 'Verzenden is niet gelukt. Bel ons direct of probeer het later opnieuw.';
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Verstuur aanvraag ->';
+      }
+    }
   });
 }
